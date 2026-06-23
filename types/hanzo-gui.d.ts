@@ -58,6 +58,9 @@ declare module "@hanzo/gui" {
     position?: "relative" | "absolute" | "static"
     flexWrap?: "wrap" | "nowrap" | "wrap-reverse"
     flexDirection?: "row" | "column" | "row-reverse" | "column-reverse"
+    /** Tamagui pseudo-style props (press/hover feedback). */
+    pressStyle?: Partial<StackStyleProps>
+    hoverStyle?: Partial<StackStyleProps>
   }
 
   export interface BaseProps extends StackStyleProps {
@@ -112,6 +115,7 @@ declare module "@hanzo/gui" {
     placeholder?: string
     onChangeText?: (text: string) => void
     keyboardType?: "default" | "numeric" | "decimal-pad" | "email-address"
+    inputMode?: "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url"
     secureTextEntry?: boolean
     autoFocus?: boolean
     disabled?: boolean
@@ -170,6 +174,9 @@ declare module "@hanzo/gui" {
   }
   export const ListItem: ComponentType<ListItemProps>
 
+  /** Resolved gui config produced by createGui(). Opaque to consumers. */
+  export type GuiInternalConfig = object
+
   /** Root provider — wraps the app with the active theme + config. */
   export interface GuiProviderProps {
     children?: ReactNode
@@ -178,7 +185,7 @@ declare module "@hanzo/gui" {
     /** Disable injecting reset CSS (web). */
     disableInjectCSS?: boolean
     /** Optional pre-built config from createGui(). */
-    config?: unknown
+    config?: GuiInternalConfig
   }
   export const GuiProvider: ComponentType<GuiProviderProps>
 

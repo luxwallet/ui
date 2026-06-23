@@ -13,7 +13,7 @@ export interface CardProps extends GuiCardProps {
 export function Card({ title, children, ...rest }: CardProps): React.JSX.Element {
   return (
     <GuiCard
-      bordered
+      borderWidth={1}
       borderColor="$borderColor"
       backgroundColor="$surface2"
       borderRadius="$6"

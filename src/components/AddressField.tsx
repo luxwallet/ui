@@ -33,7 +33,7 @@ export function AddressField({
           value={value}
           onChangeText={onChange}
           placeholder={placeholder}
-          editable={!disabled}
+          disabled={disabled}
           testID="address-field-input"
         />
         {onScan ? (
