@@ -8,7 +8,8 @@
  *
  * Layers:
  *   - provider  : WalletUIProvider (wraps @hanzo/gui's GuiProvider)
- *   - theme     : Lux brand tokens + runtime white-label applier
+ *   - brand     : white-label copy + theme flow in via prop, read via context
+ *   - theme     : default brand tokens + runtime white-label applier
  *   - components: thin primitives over @hanzo/gui
  *   - screens   : prop-driven screen shells (no @luxwallet/sdk coupling)
  *
@@ -20,6 +21,10 @@
 // Provider
 export { WalletUIProvider } from "./WalletUIProvider"
 export type { WalletUIProviderProps } from "./WalletUIProvider"
+
+// Brand context (white-label copy + theme flow in via prop, read via context)
+export { BrandProvider, useBrand } from "./brand"
+export type { WalletBrand } from "./brand"
 
 // Theme
 export {

@@ -16,7 +16,7 @@ export interface TokenRowProps {
   balance: string
   /** Pre-formatted USD value, e.g. "$42,718.93". */
   usdValue?: string
-  /** Secondary label under the symbol, e.g. "C-Chain" or "Hanzo earnings". */
+  /** Secondary label under the symbol, e.g. "C-Chain" or "Staking rewards". */
   subLabel?: ReactNode
   chainKind?: ChainKind
   chainLabel?: string

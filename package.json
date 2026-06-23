@@ -46,6 +46,7 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
     "clean": "rm -rf dist"
   },
   "peerDependencies": {
@@ -60,7 +61,8 @@
   },
   "devDependencies": {
     "@types/react": "^18.3.12",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "vitest": "^3.0.5"
   },
   "publishConfig": {
     "access": "public"
