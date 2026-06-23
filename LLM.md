@@ -88,20 +88,36 @@ toolchain when this package is wired into the gui monorepo build (see below).
 
 ```sh
 pnpm install --no-frozen-lockfile
-pnpm typecheck   # tsc --noEmit, strict — MUST be green
+pnpm build       # tsc -p tsconfig.build.json — emits dist/types, src vs REAL gui
+pnpm typecheck   # tsc --noEmit — src + the ambient shim; MUST also be green
 ```
 
-State as of scaffold:
-- `pnpm install` resolves the **real `@hanzo/gui@7.3.0`** (pnpm auto-installs
-  the peer when available on the registry), so `tsc` typechecks `src/` against
-  the **actual** gui component prop types — not a stub. Verified: a deliberate
-  bogus prop is caught against the real `ButtonProps`.
-- `types/hanzo-gui.d.ts` is an **ambient fallback** for environments where
-  `@hanzo/gui` is *not* installed (it pulls the full Tamagui+RN toolchain).
-  When the real package is present in `node_modules`, its `types/index.d.ts`
-  wins and the shim is ignored. Keep the shim's surface in sync only if you
-  add a gui primitive the shim doesn't yet declare *and* you need offline
-  typecheck.
+Run **both**. They check different things and a primitive can pass one and fail
+the other (this bit us once — see below):
+- `pnpm build` (`tsconfig.build.json`) **excludes `types/`**, so it typechecks
+  `src/` against the **real `@hanzo/gui@7.3.0`** prop types (resolved into
+  `node_modules` — Tamagui fork, `@hanzogui/*` packages). This is the
+  authoritative gate and it emits `dist/types/`.
+- `pnpm typecheck` (`tsconfig.json`) **includes `types/hanzo-gui.d.ts`**, the
+  ambient `declare module "@hanzo/gui"` fallback for offline environments where
+  the real package (full Tamagui+RN toolchain) isn't installed.
+
+The two are kept consistent: the shim is a SUPERSET fallback, but the props
+`src/` actually uses must exist in BOTH the real gui types and the shim, with the
+same names. The real Tamagui API is the source of truth — when they disagree, fix
+`src/` to the real API and align the shim, never the reverse.
+
+Real-vs-shim drift fixed (the props the scaffold used did NOT exist on real
+Tamagui; the permissive shim hid it from `typecheck`, and `build` was never run):
+- `Input`: `editable` / `keyboardType` are RN-only and omitted by this web-first
+  fork → use `disabled` and `inputMode="decimal"`.
+- `Card`: no `bordered` variant → use `borderWidth={1}` (+ existing `borderColor`).
+- `ListItem`: no `pressTheme` / `hoverTheme` booleans → use the real `pressStyle`
+  / `hoverStyle` pseudo-style props (applied only when `onPress` is set).
+- `WalletUIProvider.guiConfig`: typed `GuiInternalConfig` (the real type of
+  `GuiProviderProps.config`), not `unknown`.
+The shim (`types/hanzo-gui.d.ts`) gained `inputMode`, `pressStyle`/`hoverStyle`,
+and a `GuiInternalConfig` export to match.
 
 ### What still needs `@hanzo/gui` fully linked to verify
 - A real **native (RN/Metro) build** and a real **web (rn-web) build** — we do

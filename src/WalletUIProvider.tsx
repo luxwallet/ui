@@ -17,7 +17,7 @@
  * conditions, so there is exactly ONE provider component for all platforms.
  */
 import { useEffect, useMemo, type ReactNode } from "react"
-import { GuiProvider } from "@hanzo/gui"
+import { GuiProvider, type GuiInternalConfig } from "@hanzo/gui"
 import { applyBrandTheme } from "./theme/applyBrandTheme"
 import type { WalletColorScheme, WalletThemeTokens } from "./theme/tokens"
 import { BrandProvider, type WalletBrand } from "./brand"
@@ -38,7 +38,7 @@ export interface WalletUIProviderProps {
    */
   tokens?: Partial<WalletThemeTokens>
   /** Pre-built @hanzo/gui config from `createGui()`, if the app has one. */
-  guiConfig?: unknown
+  guiConfig?: GuiInternalConfig
 }
 
 export function WalletUIProvider({

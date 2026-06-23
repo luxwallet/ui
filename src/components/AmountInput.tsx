@@ -38,8 +38,8 @@ export function AmountInput({
           value={value}
           onChangeText={onChange}
           placeholder="0.00"
-          keyboardType="decimal-pad"
-          editable={!disabled}
+          inputMode="decimal"
+          disabled={disabled}
           testID="amount-input"
         />
         <Text fontSize={15} fontWeight="600" color="$neutral1">

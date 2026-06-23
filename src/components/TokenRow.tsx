@@ -38,8 +38,8 @@ export function TokenRow({
   return (
     <ListItem
       onPress={onPress}
-      pressTheme={Boolean(onPress)}
-      hoverTheme={Boolean(onPress)}
+      pressStyle={onPress ? { opacity: 0.85 } : undefined}
+      hoverStyle={onPress ? { backgroundColor: "$surface2" } : undefined}
       borderRadius="$4"
       padding="$3"
       testID={`token-row-${symbol}`}
