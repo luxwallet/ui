@@ -36,6 +36,14 @@ export interface ConnectWalletProps {
   error?: string
   /** Optional product/brand title. */
   title?: string
+  /**
+   * Primary unified-auth action — Hanzo IAM (social / email / password) via
+   * @hanzo/iam (HIP-0111). When provided, rendered as the top CTA above the
+   * wallet chain picker. Omit to show wallet-only login.
+   */
+  onIamLogin?: () => void
+  /** Label for the IAM button. */
+  iamLabel?: string
 }
 
 export function ConnectWallet({
@@ -46,9 +54,22 @@ export function ConnectWallet({
   connecting,
   error,
   title = "Connect a wallet",
+  onIamLogin,
+  iamLabel = "Continue with Hanzo",
 }: ConnectWalletProps): React.JSX.Element {
   return (
     <ScreenScaffold title={title}>
+      {onIamLogin ? (
+        <Card title="Sign in">
+          <Button tone="primary" size="$4" onPress={onIamLogin} testID="connect-iam">
+            {iamLabel}
+          </Button>
+          <Text fontSize={12} color="$neutral2" marginTop="$2">
+            Google, GitHub, email, or password — secured by Hanzo IAM.
+          </Text>
+        </Card>
+      ) : null}
+
       <Card title="Chain">
         <XStack gap="$2" flexWrap="wrap">
           {LOGIN_CHAINS.map((chain) => {
