@@ -14,6 +14,7 @@ import { Button } from "../components/Button"
 import { ChainBadge } from "../components/ChainBadge"
 import { ScreenScaffold } from "../components/ScreenScaffold"
 import { LOGIN_CHAINS, type ChainKind } from "../chains"
+import { brandIamLabel, brandIamSubtext, useBrand } from "../brand"
 
 export interface WalletConnector {
   id: string
@@ -37,12 +38,15 @@ export interface ConnectWalletProps {
   /** Optional product/brand title. */
   title?: string
   /**
-   * Primary unified-auth action — Hanzo IAM (social / email / password) via
-   * @hanzo/iam (HIP-0111). When provided, rendered as the top CTA above the
+   * Primary unified-auth action — the brand's IAM (social / email / password)
+   * via @hanzo/iam (HIP-0111). When provided, rendered as the top CTA above the
    * wallet chain picker. Omit to show wallet-only login.
    */
   onIamLogin?: () => void
-  /** Label for the IAM button. */
+  /**
+   * Label for the IAM button. Defaults to `Continue with <brand.shortName>`
+   * (from the brand in context), or "Continue" when no brand is set.
+   */
   iamLabel?: string
 }
 
@@ -55,17 +59,23 @@ export function ConnectWallet({
   error,
   title = "Connect a wallet",
   onIamLogin,
-  iamLabel = "Continue with Hanzo",
+  iamLabel,
 }: ConnectWalletProps): React.JSX.Element {
+  const brand = useBrand()
+  // Brand-neutral defaults: derive the IAM copy from the brand's short name,
+  // or fall back to generic copy with no org name when no brand is set.
+  const resolvedIamLabel = iamLabel ?? brandIamLabel(brand)
+  const iamSubtext = brandIamSubtext(brand)
+
   return (
     <ScreenScaffold title={title}>
       {onIamLogin ? (
         <Card title="Sign in">
           <Button tone="primary" size="$4" onPress={onIamLogin} testID="connect-iam">
-            {iamLabel}
+            {resolvedIamLabel}
           </Button>
           <Text fontSize={12} color="$neutral2" marginTop="$2">
-            Google, GitHub, email, or password — secured by Hanzo IAM.
+            {iamSubtext}
           </Text>
         </Card>
       ) : null}
