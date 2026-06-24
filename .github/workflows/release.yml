@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: luxfi-linux-amd64
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
