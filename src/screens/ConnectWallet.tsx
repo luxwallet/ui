@@ -1,17 +1,19 @@
 /**
  * ConnectWallet screen shell — the SIWx (Sign-In With X) login surface.
  *
- * Presents the five chain ecosystems supported by @luxwallet/connect
- * (EVM / Solana / Bitcoin / TON / XRP). For the chosen chain it lists the
- * available connectors (injected wallets, WalletConnect, etc.) passed by the
- * app. PURE PRESENTATION: connector discovery, the SIWx challenge, and the
- * signature all happen in @luxwallet/connect + @luxwallet/sdk. This component
- * only renders choices and fires `onSelectConnector`.
+ * Presents the seven chain ecosystems supported by @luxwallet/connect
+ * (EVM / Solana / Bitcoin / TON / XRP / Polkadot / Cardano). For the chosen
+ * chain it lists the available connectors (injected wallets, WalletConnect,
+ * etc.) passed by the app. PURE PRESENTATION: connector discovery, the SIWx
+ * challenge, and the signature all happen in @luxwallet/connect +
+ * @luxwallet/sdk. This component only renders choices and fires
+ * `onSelectConnector`. Each chain is shown with its real `ChainIcon` logo.
  */
 import { XStack, YStack, Text } from "@hanzo/gui"
 import { Card } from "../components/Card"
 import { Button } from "../components/Button"
 import { ChainBadge } from "../components/ChainBadge"
+import { ChainIcon } from "../components/ChainIcon"
 import { ScreenScaffold } from "../components/ScreenScaffold"
 import { LOGIN_CHAINS, type ChainKind } from "../chains"
 import { brandIamLabel, brandIamSubtext, useBrand } from "../brand"
@@ -92,8 +94,9 @@ export function ConnectWallet({
                 size="$3"
                 onPress={() => onSelectChain(chain.kind)}
                 testID={`connect-chain-${chain.kind}`}
+                icon={<ChainIcon kind={chain.kind} size={18} />}
               >
-                {chain.glyph} {chain.label}
+                {chain.label}
               </Button>
             )
           })}
