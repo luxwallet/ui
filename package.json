@@ -1,6 +1,6 @@
 {
   "name": "@luxwallet/ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Shared, cross-target Lux Wallet UI component library built on @hanzo/gui. One component tree renders on web (react-native-web), browser extension, desktop, and native React Native.",
   "license": "MIT",
   "author": "Lux Wallet team",

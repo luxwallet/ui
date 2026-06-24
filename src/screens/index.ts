@@ -29,3 +29,68 @@ export type { SettingsProps, SettingsGroup, SettingsEntry } from "./Settings"
 
 export { ConnectWallet } from "./ConnectWallet"
 export type { ConnectWalletProps, WalletConnector } from "./ConnectWallet"
+
+export { ApproveConnection } from "./ApproveConnection"
+export type { ApproveConnectionProps, ConnectionRisk } from "./ApproveConnection"
+
+// RiskLevel is the same shape as ./Signing's and is already exported above; the
+// remaining SignMessage types are unique to the off-chain signature surface.
+export { SignMessage } from "./SignMessage"
+export type {
+  SignMessageProps,
+  SignMessageVariant,
+  SignMessageAccount,
+  TypedDataRow,
+  TypedDataView,
+} from "./SignMessage"
+
+export { Activity } from "./Activity"
+export type {
+  ActivityProps,
+  ActivityTab,
+  ActivityNet,
+  ActivityStatus,
+  ActivityTransaction,
+  ActivityMessage,
+} from "./Activity"
+
+export { ImportWallet } from "./ImportWallet"
+export type { ImportWalletProps, ImportMethod, DiscoveredAccount } from "./ImportWallet"
+
+export { CreateWallet } from "./CreateWallet"
+export type { CreateWalletProps, CreateWalletStep, ConfirmSlot } from "./CreateWallet"
+
+export { ConnectHardware } from "./ConnectHardware"
+export type {
+  ConnectHardwareProps,
+  HardwareDevice,
+  HardwareAccount,
+  HardwareStatus,
+} from "./ConnectHardware"
+
+export { AccountList } from "./AccountList"
+export type { AccountListProps, AccountItem, AccountGroup } from "./AccountList"
+
+export { AccountDetail } from "./AccountDetail"
+export type { AccountDetailProps } from "./AccountDetail"
+
+export { NFTGallery } from "./NFTGallery"
+export type { NFTGalleryProps, NFTItem, NFTCollection } from "./NFTGallery"
+
+export { SendNFT } from "./SendNFT"
+export type { SendNFTProps, SendNftAsset } from "./SendNFT"
+
+export { ConnectedSites } from "./ConnectedSites"
+export type { ConnectedSitesProps, ConnectedSite } from "./ConnectedSites"
+
+export { TokenApprovals } from "./TokenApprovals"
+export type { TokenApprovalsProps, TokenApproval, ApprovalTab, ApprovalRisk } from "./TokenApprovals"
+
+export { GasTopUp } from "./GasTopUp"
+export type { GasTopUpProps, GasPayToken } from "./GasTopUp"
+
+export { AddNetwork } from "./AddNetwork"
+export type { AddNetworkProps, AddNetworkField, FieldError, KnownChain } from "./AddNetwork"
+
+export { Unlock } from "./Unlock"
+export type { UnlockProps } from "./Unlock"
