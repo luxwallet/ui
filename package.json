@@ -52,15 +52,20 @@
   "peerDependencies": {
     "@hanzo/gui": ">=7",
     "react": ">=18",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-svg": "*"
   },
   "peerDependenciesMeta": {
     "react-native": {
+      "optional": true
+    },
+    "react-native-svg": {
       "optional": true
     }
   },
   "devDependencies": {
     "@types/react": "^18.3.12",
+    "react-native-svg": "15.15.5",
     "tsup": "^8.3.5",
     "typescript": "~5.9.2",
     "vitest": "^3.0.5"

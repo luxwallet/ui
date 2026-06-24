@@ -37,13 +37,21 @@ export {
   applyBrandTheme,
 } from "./theme"
 
-// Chains (presentation metadata for the 5 login ecosystems)
+// Chains (presentation metadata for the 7 login ecosystems)
 export {
   type ChainKind,
   type ChainMeta,
   LOGIN_CHAINS,
   shortenAddress,
 } from "./chains"
+
+// Chain logo geometry — shared, dependency-free SVG path data (ONE source of
+// truth, also mirrorable by web-only hosts like Hanzo IAM web).
+export {
+  type ChainIconPath,
+  type ChainIconGeometry,
+  CHAIN_ICON_PATHS,
+} from "./chain-icon-paths"
 
 // Primitives
 export * from "./components"

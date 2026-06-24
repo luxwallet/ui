@@ -5,6 +5,7 @@
 export { Button, type ButtonProps, type ButtonTone } from "./Button"
 export { Card, type CardProps } from "./Card"
 export { ChainBadge, type ChainBadgeProps } from "./ChainBadge"
+export { ChainIcon, type ChainIconProps } from "./ChainIcon"
 export { AddressField, type AddressFieldProps } from "./AddressField"
 export { AmountInput, type AmountInputProps } from "./AmountInput"
 export { TokenRow, type TokenRowProps } from "./TokenRow"
