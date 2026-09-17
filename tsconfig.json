@@ -23,7 +23,6 @@
     "resolveJsonModule": true,
     "noEmit": true,
 
-    "baseUrl": ".",
     "types": ["react"]
   },
   "include": ["src", "types"],
